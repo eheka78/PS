@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+// 전역 변수수
 vector<vector<char>> start;
 vector<vector<char>> result;
 vector<char> temp;
