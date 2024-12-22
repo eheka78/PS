@@ -12,22 +12,26 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	//input
+	// input
+	//1 <= n <= 100, 000
 	int n;
 	cin >> n;
 
-	//process
-	int cnt_max{ 0 }, cnt{ 0 };
-	while (true) {
-		if (n == 0) { break; }
-
-		int temp = pow(static_cast<int>(sqrt(n)), 2);
-		//cout << static_cast<int>(sqrt(n)) << ": " << temp << "\t";
-		n -= temp;
-		cnt++;
+	// process 
+	int dp[100'001] = {};
+	// 초기화
+	for (int i{ 0 }; i <= n; i++) {
+		dp[i] = i;
 	}
-	//cout << '\n';
+	
+	// 1부터 차례대로 항의 최고개수를 구합니다.
+	for (int i{ 1 }; i <= n; i++) {
+		for (int j{ 1 }; j * j <= i; j++) {
+			dp[i] = min(dp[i], dp[i - j * j] + 1);
+		}
+	}
 
-	//output
-	cout << cnt << '\n';
+	// output
+	cout << dp[n] << '\n';
+	return 0;
 }
